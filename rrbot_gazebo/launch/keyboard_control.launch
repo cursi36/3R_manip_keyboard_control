@@ -1,0 +1,12 @@
+<launch>
+
+  <node name="teleop_motions_node" pkg="rrbot_gazebo" type="teleop_motions_node" respawn="false" output="screen">
+  </node> 
+
+  <node name="keyboard_subscriber_twist_node" pkg="keyboard" type="keyboard_subscriber_twist_node" respawn="false" output="screen">
+  </node>
+
+  <node name="keyboard" pkg="keyboard" type="keyboard" respawn="false" output="screen">
+  </node>
+
+</launch>

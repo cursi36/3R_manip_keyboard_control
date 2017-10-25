@@ -7,9 +7,12 @@
   <arg name="headless" default="false"/>
   <arg name="debug" default="false"/>
 
+
+  <env name="GAZEBO_MODEL_PATH" value="$(find rrbot_gazebo)/models:$(optenv GAZEBO_MODEL_PATH)"/>
+
   <!-- We resume the logic in empty_world.launch, changing only the name of the world to be launched -->
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
-    <arg name="world_name" value="$(find rrbot_gazebo)/worlds/rrbot.world"/>
+   <arg name="world_name" value="$(find rrbot_gazebo)/worlds/rrbot.world"/> 
     <arg name="debug" value="$(arg debug)" />
     <arg name="gui" value="$(arg gui)" />
     <arg name="paused" value="$(arg paused)"/>
@@ -25,7 +28,22 @@
   <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
     args="-urdf -model rrbot -param robot_description"/>
 
-  <!-- ros_control rrbot launch file -->
-  <!--include file="$(find rrbot_control)/launch/rrbot_control.launch" /-->
+ <!-- ros_control rrbot launch file -->
+ <include file="$(find rrbot_control)/launch/rrbot_control.launch" />
+
+
+
+<node name="keyboard_subscriber_twist_node" pkg="keyboard" type="keyboard_subscriber_twist_node" respawn="false" output="screen">
+  </node> 
+
+  <node name="keyboard" pkg="keyboard" type="keyboard" respawn="false" output="screen">
+  </node> 
+
+
+<!-- <node name="joint_publisher_node" pkg="rrbot_gazebo" type="joint_publisher_node" respawn="false" output="screen">
+  </node> -->
+
+ <!-- Motion planning -->
+   <!--<include file="$(find rrbot_moveit_config)/launch/move_group.launch"/> -->
 
 </launch>

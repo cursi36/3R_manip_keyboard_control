@@ -21,5 +21,8 @@
   <run_depend>rviz</run_depend>
 
   <export>
+
+ <gazebo plugin_path="${prefix}/lib" gazebo_media_path="${prefix}" />
+
   </export>
 </package>
